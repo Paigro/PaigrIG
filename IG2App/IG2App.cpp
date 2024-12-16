@@ -442,7 +442,7 @@ void IG2App::setupScene(void)
 		kf->setRotation(keyFrameRot);
 		kf->setScale(keyFrameScale);
 
-		
+
 		// Keyframe 2: volver al inicio.
 		kf = track->createNodeKeyFrame(6);
 		keyframePos += Ogre::Vector3::NEGATIVE_UNIT_X * movementLength; // Movemos movementLength hacia la -X.
@@ -473,8 +473,8 @@ void IG2App::setupScene(void)
 		kf->setTranslate(keyframePos);
 		kf->setRotation(keyFrameRot);
 		kf->setScale(keyFrameScale);
-		
-		
+
+
 		// Keyframe 4.5: Ponerse de frente
 		kf = track->createNodeKeyFrame(12);
 		keyFrameRot = Quaternion(Degree(0), Vector3(0, 1, 0)); // Rotamos 90º en Y hacia X.
@@ -487,6 +487,52 @@ void IG2App::setupScene(void)
 		animationState = mSM->createAnimationState("sinbadWalking");
 		animationState->setLoop(true);
 		animationState->setEnabled(true);
+	}
+
+#pragma endregion
+
+#pragma region sistemas de particulas:
+
+	if (PARTICLESYSTEM_EXERCISE)
+	{
+		//------------------------------------------------------------------------
+		// Creating the floor
+
+		MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+			Plane(Vector3::UNIT_Y, 0),
+			1500, 1500, 200, 200, true, 1, 5, 5,
+			Vector3::UNIT_Z);
+
+		// Creating the plane
+		Entity* ent = mSM->createEntity("exampleFloor", "floor");
+		ent->setMaterialName("stonesMaterial");
+		SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
+		floor->attachObject(ent);
+
+		//------------------------------------------------------------------------
+		// Creating Sinbad
+
+		sinbadEnt = mSM->createEntity("Sinbad.mesh");
+		sinbadNode = mSM->getRootSceneNode()->createChildSceneNode();
+		sinbadNode->attachObject(sinbadEnt);
+		sinbadNode->scale(30, 30, 30);
+		sinbadNode->setPosition(-300, 150, 0); // On the floor!
+		sinbadNode->setInitialState();
+
+		//------------------------------------------------------------------------
+		// Billboard effect (smiley) in sphere
+
+		Entity* sphereEnt = mSM->createEntity("sphere.mesh");
+		SceneNode* sphereNode = mSM->getRootSceneNode()->createChildSceneNode();
+		sphereNode->attachObject(sphereEnt);
+		sphereNode->setPosition(Vector3(300, 100, 0));
+		sphereEnt->setMaterialName("example/esferaSmile");
+
+
+		pSys = mSM->createParticleSystem("psSmoke", "smokePS");
+		pSys->setEmitting(true);
+		pSNode = mSM->getRootSceneNode()->createChildSceneNode();
+		pSNode->attachObject(pSys);
 	}
 
 #pragma endregion

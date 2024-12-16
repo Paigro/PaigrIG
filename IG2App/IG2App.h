@@ -25,7 +25,8 @@
 const bool CLOCK_EXERCISE = false; // Si aparece el ejercicio del reloj o no.
 const bool AIRPLANE_EXERCISE = false; // Si aparece el ejercicio del avion o no.
 const bool MATERIALS_EXERCISE = false; // Si aparece el ejercicio de materiales, luces y sombras o no.
-const bool ANIMATION_EXERCISE = true; // Si aparece el ejercicio de animaciones o no.
+const bool ANIMATION_EXERCISE = false; // Si aparece el ejercicio de animaciones o no.
+const bool PARTICLESYSTEM_EXERCISE = true; // Si aparece el ejercicio de sistemas de particulas o no.
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener {
@@ -101,6 +102,10 @@ private:
 	Ogre::Entity* sinbadEnt = nullptr; // Entidad de Sinbad.
 	Ogre::Entity* swordLeftEnt = nullptr; // Entidad de la espada izquierda.
 	Ogre::Entity* swordRightEnt = nullptr; // Entidad de la espada derecha.
+
+	//----Sistemas de particulas:
+	ParticleSystem* pSys = nullptr;
+	Ogre::SceneNode* pSNode = nullptr;
 };
 
 #endif

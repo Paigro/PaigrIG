@@ -1,3 +1,4 @@
+//------Materiales, luces y sombras:
 material stonesMaterial
 {
     technique
@@ -10,13 +11,6 @@ material stonesMaterial
             }
         }
     }
-    technique
-    {
-        pass
-        {
-             diffuse 1.0 0.0 0.0
-        }
-    }
 }
 
 material orangeMaterial
@@ -26,13 +20,6 @@ material orangeMaterial
         pass
         {
            diffuse 1.0 0.5 0.0 1.0
-        }
-    }
-    technique
-    {
-        pass
-        {
-             diffuse 1.0 0.0 0.0
         }
     }
 }
@@ -48,13 +35,6 @@ material waterAnimMaterial
                 texture water.jpg
                 scroll_anim -0.1 0.0 
             }
-        }
-    }
-    technique
-    {
-        pass
-        {
-             diffuse 1.0 0.0 0.0
         }
     }
 }
@@ -74,11 +54,48 @@ material frostOrangeSphere
             diffuse 1.0 0.5 0.0
         }
     }
+}
+
+//------Sistemas de particulas.
+material example/esferaSmile{
+    technique {
+		pass {
+			texture_unit {
+				texture spotlight_image.png
+				env_map spherical 
+	    	}
+		}
+    }
+}
+
+material example/panel{
+	technique {
+		pass {
+			lighting off
+			texture_unit {
+				texture 10points.png
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material smokeMaterial
+{
     technique
     {
-        pass
+        pass 
         {
-             diffuse 1.0 0.0 0.0
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+            texture_unit
+            {
+                texture smoke.png
+                tex_address_mode clamp
+                //colour_op_ex modulate src_texture src_manual 1.00 0.50 0.00 1.00
+            }
+            //diffuse 1.00 0.50 0.00 1.00
         }
     }
 }
