@@ -22,14 +22,21 @@
 //#include "DataSizes.h"
 #include "Airplane.h"
 
+const bool CLOCK_EXERCISE = false; // Si aparece el ejercicio del reloj o no.
+const bool AIRPLANE_EXERCISE = false; // Si aparece el ejercicio del avion o no.
+const bool MATERIALS_EXERCISE = false; // Si aparece el ejercicio de materiales, luces y sombras o no.
+const bool ANIMATION_EXERCISE = true; // Si aparece el ejercicio de animaciones o no.
+
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener {
 
 public:
+
 	explicit IG2App() : IG2ApplicationContext("IG2App") { };
 	virtual ~IG2App() { };
 
 protected:
+
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 	virtual void shutdown();
 	virtual void setup();
@@ -71,6 +78,29 @@ private:
 	Ogre::SceneNode* planeNode = nullptr; // Nodo que tiene el plano.
 	Ogre::SceneNode* headNode = nullptr; // Nodo que tiene el ogreHead.
 	Ogre::SceneNode* sphereNode = nullptr; // Nodo que tiene una esfera.
+
+	//----Animacion:
+
+	// Animation state
+	Ogre::AnimationState* animationState; // Caminado.
+
+	// Animation states for Sinbad
+	Ogre::AnimationState* animationStateDance; // Baile.
+	Ogre::AnimationState* animationStateRunBase; // Carrera parte de abajo.
+	Ogre::AnimationState* animationStateRunTop; // Carrera parte de arriba.
+
+	// Flags to control the animations
+	bool isDancing = false; // Si esta bailando o no.
+	bool isRunning = false; // Si esta corriendo o no.
+	bool isWalking = false; // Si esta caminando o no.
+	bool attachedLeftSword = false; // Si tiene la espada izquierda o no.
+	bool attachedRightSword = false; // Si tiene la espada derecha o no.
+
+	// Sinbad and swords
+	Ogre::SceneNode* sinbadNode = nullptr; // Nodo que contiene a Sinbad.
+	Ogre::Entity* sinbadEnt = nullptr; // Entidad de Sinbad.
+	Ogre::Entity* swordLeftEnt = nullptr; // Entidad de la espada izquierda.
+	Ogre::Entity* swordRightEnt = nullptr; // Entidad de la espada derecha.
 };
 
 #endif
