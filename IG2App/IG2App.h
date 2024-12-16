@@ -28,6 +28,7 @@ const bool MATERIALS_EXERCISE = false; // Si aparece el ejercicio de materiales,
 const bool ANIMATION_EXERCISE = false; // Si aparece el ejercicio de animaciones o no.
 const bool PARTICLESYSTEM_EXERCISE = false; // Si aparece el ejercicio de sistemas de particulas o no.
 const bool MULTITEXTURES_EXERCISE = true; // Si aparece el ejercicio de multitexturas o no.
+const bool SHADERS_EXERCISE = true; // Si aparece el ejercicio de shaders o no.
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener {
@@ -50,12 +51,12 @@ private:
 	//static const Vector3 CAMERA_INIT_POSITION;
 
 	// Scene manager and tray system
-	Ogre::SceneManager* mSM = nullptr;
+	Ogre::SceneManager* mSM = nullptr; // Scene Manager.
 	OgreBites::TrayManager* mTrayMgr = nullptr;
 
 	// Camera
-	Ogre::SceneNode* mCamNode = nullptr;
-	OgreBites::CameraMan* mCamMgr = nullptr;
+	Ogre::SceneNode* mCamNode = nullptr; // Nodo de la camara.
+	OgreBites::CameraMan* mCamMgr = nullptr; // Camara.
 
 
 	//-----Practica para el examen:
@@ -105,13 +106,23 @@ private:
 	Ogre::Entity* swordRightEnt = nullptr; // Entidad de la espada derecha.
 
 	//----Sistemas de particulas:
-	ParticleSystem* pSys = nullptr;
-	Ogre::SceneNode* pSNode = nullptr;
 
-	Entity* sphereTailEnt = nullptr;
-	ParticleSystem* tailPsys = nullptr;
-	Ogre::SceneNode* sphereTailNode = nullptr;
-	Ogre::SceneNode* ghostNode = nullptr;
+	ParticleSystem* pSys = nullptr; // Sistema de particulas de humo.
+
+	Ogre::SceneNode* pSNode = nullptr; // Nodo que tiene al sistema de particulas de humo.
+
+
+	Entity* sphereTailEnt = nullptr; // Esfera que va a rotar y tiene un trail. 
+
+	ParticleSystem* tailPsys = nullptr; // Sistemas de particulas que hara de trail de la esfera.
+
+	Ogre::SceneNode* sphereTailNode = nullptr; // Nodo que tiene a la esfera
+	Ogre::SceneNode* ghostNode = nullptr; // Nodo fantasma que tiene a la esfera y que rotaremos.
+
+	//------Shaders:
+
+	Entity* orangeSphereEnt = nullptr; // Entidad esfera uv a la que le aplicaremos shaders.
+	Ogre::SceneNode* orangeSphereNode = nullptr; // Nodo que tiene a la esfera uv a la que le aplicaremos shaders.
 };
 
 #endif

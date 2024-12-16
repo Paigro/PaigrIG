@@ -604,35 +604,53 @@ void IG2App::setupScene(void)
 
 #pragma endregion
 
+#pragma region shaders:
+
+	orangeSphereEnt = mSM->createEntity("uv_sphere.mesh");
+	orangeSphereNode = mSM->getRootSceneNode()->createChildSceneNode();
+	orangeSphereEnt->setMaterialName("orageShader");
+	orangeSphereNode->attachObject(orangeSphereEnt);
+	orangeSphereNode->setPosition(0, 300, 0);
+
+	//Creating a skyplane
+	Ogre::Plane plane;
+	plane.d = 1000;
+	plane.normal = Ogre::Vector3::UNIT_Z;
+
+	// Sky using multitexture
+	mSM->setSkyPlane(true, plane, "skyPlaneShader", 20, 1, true, 0, 50, 50);
+
+
+#pragma endregion
+
 }
 
 void IG2App::frameRendered(const Ogre::FrameEvent& evt)
 {
-	// Example of NodeAnimationTrack
-	//------------------------------------------------------------------------
-	// TODO...
-
-
-	// Example of Sinbad's animation (running and dancing)
-	//------------------------------------------------------------------------
-	if (isDancing)
+	if (ANIMATION_EXERCISE)
 	{
-		animationStateDance->addTime(evt.timeSinceLastFrame);
-	}
-	if (isRunning)
-	{
-		animationStateRunBase->addTime(evt.timeSinceLastFrame);
-		animationStateRunTop->addTime(evt.timeSinceLastFrame);
-	}
-	if (isWalking)
-	{
-		animationState->addTime(evt.timeSinceLastFrame);
-		animationStateRunBase->addTime(evt.timeSinceLastFrame);
-		animationStateRunTop->addTime(evt.timeSinceLastFrame);
+		if (isDancing)
+		{
+			animationStateDance->addTime(evt.timeSinceLastFrame);
+		}
+		if (isRunning)
+		{
+			animationStateRunBase->addTime(evt.timeSinceLastFrame);
+			animationStateRunTop->addTime(evt.timeSinceLastFrame);
+		}
+		if (isWalking)
+		{
+			animationState->addTime(evt.timeSinceLastFrame);
+			animationStateRunBase->addTime(evt.timeSinceLastFrame);
+			animationStateRunTop->addTime(evt.timeSinceLastFrame);
+		}
 	}
 
-	if (sphereTailNode != nullptr)
+	if (PARTICLESYSTEM_EXERCISE)
 	{
-		ghostNode->yaw(Degree(1));
+		if (sphereTailNode != nullptr)
+		{
+			ghostNode->yaw(Degree(1));
+		}
 	}
 }
