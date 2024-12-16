@@ -106,6 +106,11 @@ private:
 	//----Sistemas de particulas:
 	ParticleSystem* pSys = nullptr;
 	Ogre::SceneNode* pSNode = nullptr;
+
+	Entity* sphereTailEnt = nullptr;
+	ParticleSystem* tailPsys = nullptr;
+	Ogre::SceneNode* sphereTailNode = nullptr;
+	Ogre::SceneNode* ghostNode = nullptr;
 };
 
 #endif

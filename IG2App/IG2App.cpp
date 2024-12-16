@@ -158,6 +158,19 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt) {
 		}
 	}
 
+	// Teclas de los sistemas de particulas:
+	if (PARTICLESYSTEM_EXERCISE)
+	{
+		switch (evt.keysym.sym)
+		{
+		case SDLK_c:
+			tailPsys->setEmitting(!tailPsys->getEmitting());
+			break;
+		default:
+			break;
+		}
+	}
+
 	return true;
 }
 
@@ -533,6 +546,18 @@ void IG2App::setupScene(void)
 		pSys->setEmitting(true);
 		pSNode = mSM->getRootSceneNode()->createChildSceneNode();
 		pSNode->attachObject(pSys);
+
+
+		ghostNode = mSM->getRootSceneNode()->createChildSceneNode();
+		sphereTailNode = ghostNode->createChildSceneNode();
+		sphereTailEnt = mSM->createEntity("uv_sphere.mesh");
+		sphereTailNode->attachObject(sphereTailEnt);
+		sphereTailNode->setPosition(1000, 400, 0);
+
+		tailPsys = mSM->createParticleSystem("pSTail", "trailPS");
+		tailPsys->setEmitting(true);
+		sphereTailNode->attachObject(tailPsys);
+
 	}
 
 #pragma endregion
@@ -562,5 +587,10 @@ void IG2App::frameRendered(const Ogre::FrameEvent& evt)
 		animationState->addTime(evt.timeSinceLastFrame);
 		animationStateRunBase->addTime(evt.timeSinceLastFrame);
 		animationStateRunTop->addTime(evt.timeSinceLastFrame);
+	}
+
+	if (sphereTailNode != nullptr)
+	{
+		ghostNode->yaw(Degree(1));
 	}
 }
