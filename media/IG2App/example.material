@@ -186,6 +186,7 @@ material skyPlane
 }
 
 //------Shaders:
+//-----------------------ORANGE_SHADER---------------------------------------------------
 
 vertex_program orangeShaderVS glsl
 {
@@ -219,7 +220,7 @@ material orageShader
     }
 }
 
-//-----------------------
+//-----------------------SKY_SHADER---------------------------------------------------
 
 vertex_program skyPlaneShaderVS glsl
 {
@@ -240,8 +241,8 @@ fragment_program skyPlaneShaderFS glsl
         param_named spaceSkyTexture int 0
         // Le pasamos la segunda textura.
         param_named lightMapTexture int 1
-        // Le pasamos la luz ambiente.
-        param_named intLuzAmb float 1.0
+        // Le pasamos la luz ambiente para distinta claridad/oscuridad de la textura.
+        param_named intLuzAmb float 0.5
     }
 }
 
@@ -253,6 +254,7 @@ material skyPlaneShader
         {
             vertex_program_ref skyPlaneShaderVS {}
             fragment_program_ref skyPlaneShaderFS {}
+
             texture_unit
             {
 				texture spaceSky.jpg
@@ -263,6 +265,116 @@ material skyPlaneShader
             {
 				texture lightMap.jpg
 				tex_address_mode wrap
+				colour_op modulate
+			}
+        }
+    }
+}
+
+//-----------------------SPHERE_SHADER---------------------------------------------------
+
+vertex_program checkerShaderVS glsl
+{
+    source checkerShaderVS.glsl
+    default_params
+    {
+        // Le pasamos la matriz de proyeeccion.
+        param_named_auto modelViewProjMat worldviewproj_matrix 
+    }
+}
+
+fragment_program checkerShaderFS glsl
+{
+    source checkerShaderFS.glsl
+    default_params
+    {
+        // Le pasamos la primera textura.
+        param_named checkerTexture int 0
+        // Le pasamos la segunda textura.
+        param_named corrosionTexture int 1
+        // Le pasamos la segunda textura.
+        param_named bumpyMetalTexture int 2
+    }
+}
+
+material checkerShader
+{
+    technique
+    {
+        pass
+        {
+            vertex_program_ref checkerShaderVS {}
+            fragment_program_ref checkerShaderFS {}
+
+            texture_unit
+            {
+				texture checker.png
+				tex_address_mode clamp
+				filtering bilinear
+			}
+			texture_unit
+            {
+				texture corrosion.jpg
+				tex_address_mode clamp
+				colour_op modulate
+			}
+            texture_unit
+            {
+				texture BumpyMetal.jpg
+				tex_address_mode clamp
+				colour_op modulate
+			}
+        }
+    }
+}
+
+//-----------------------EMPTY_SHADER---------------------------------------------------
+
+vertex_program emptyShaderVS glsl
+{
+    source emptyShaderVS.glsl
+    default_params
+    {
+        // Le pasamos la matriz de proyeeccion.
+        param_named_auto modelViewProjMat worldviewproj_matrix 
+    }
+}
+
+fragment_program emptyShaderFS glsl
+{
+    source emptyShaderFS.glsl
+    default_params
+    {
+        // Le pasamos la primera textura.
+        param_named checkerTexture int 0
+        // Le pasamos la segunda textura.
+        param_named corrosionTexture int 1
+    }
+}
+
+material emptyShader
+{
+    technique
+    {
+        pass
+        {
+            vertex_program_ref emptyShaderVS {}
+            fragment_program_ref emptyShaderFS {}
+
+            // Para que se vean las caras traseras y frontales.
+            cull_hardware none
+			cull_software none
+
+            texture_unit
+            {
+				texture checker.png
+				tex_address_mode clamp
+				filtering bilinear
+			}
+			texture_unit
+            {
+				texture corrosion.jpg
+				tex_address_mode clamp
 				colour_op modulate
 			}
         }

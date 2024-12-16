@@ -608,7 +608,9 @@ void IG2App::setupScene(void)
 
 	orangeSphereEnt = mSM->createEntity("uv_sphere.mesh");
 	orangeSphereNode = mSM->getRootSceneNode()->createChildSceneNode();
-	orangeSphereEnt->setMaterialName("orageShader");
+	//orangeSphereEnt->setMaterialName("orageShader"); // Shader que hace todo naranja.
+	//orangeSphereEnt->setMaterialName("checkerShader"); // Shader que pone 2 textura en forma de tablero de ajedrez.
+	orangeSphereEnt->setMaterialName("emptyShader"); // Shader que pone 1 textura en forma de tablero de ajedrez dejando transparente las casillas blancas.
 	orangeSphereNode->attachObject(orangeSphereEnt);
 	orangeSphereNode->setPosition(0, 300, 0);
 
@@ -620,6 +622,16 @@ void IG2App::setupScene(void)
 	// Sky using multitexture
 	mSM->setSkyPlane(true, plane, "skyPlaneShader", 20, 1, true, 0, 50, 50);
 
+	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Plane(Vector3::UNIT_Y, 0),
+		1500, 1500, 200, 200, true, 1, 1, 1,
+		Vector3::UNIT_Z);
+
+	// Creating the plane
+	Entity* ent = mSM->createEntity("exampleFloor", "floor");
+	ent->setMaterialName("beach");
+	SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
+	floor->attachObject(ent);
 
 #pragma endregion
 

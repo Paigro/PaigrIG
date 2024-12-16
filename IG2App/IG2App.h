@@ -27,7 +27,7 @@ const bool AIRPLANE_EXERCISE = false; // Si aparece el ejercicio del avion o no.
 const bool MATERIALS_EXERCISE = false; // Si aparece el ejercicio de materiales, luces y sombras o no.
 const bool ANIMATION_EXERCISE = false; // Si aparece el ejercicio de animaciones o no.
 const bool PARTICLESYSTEM_EXERCISE = false; // Si aparece el ejercicio de sistemas de particulas o no.
-const bool MULTITEXTURES_EXERCISE = true; // Si aparece el ejercicio de multitexturas o no.
+const bool MULTITEXTURES_EXERCISE = false; // Si aparece el ejercicio de multitexturas o no.
 const bool SHADERS_EXERCISE = true; // Si aparece el ejercicio de shaders o no.
 
 
