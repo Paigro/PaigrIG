@@ -32,7 +32,7 @@ material waterAnimMaterial
         {
             texture_unit
             {
-                texture water.jpg
+                texture water00.jpg
                 scroll_anim -0.1 0.0 
             }
         }
@@ -89,13 +89,98 @@ material smokeMaterial
             lighting off
             scene_blend alpha_blend
             depth_write off
+            // El tex_addres_mode dice lo que aparece en la textura cuando se pasa del [0, 1]. Clamp van al borde mas cercano. Wrap (defecto) repiten la textura. Mirror refleja.
             texture_unit
             {
                 texture smoke.png
                 tex_address_mode clamp
-                //colour_op_ex modulate src_texture src_manual 1.00 0.50 0.00 1.00
             }
-            //diffuse 1.00 0.50 0.00 1.00
+        }
+    }
+}
+
+//------Multitexturas:
+
+material waterLight
+{
+    technique
+    {
+        pass 
+        {
+            texture_unit
+            {
+                texture water01.jpg
+                colour_op modulate
+            } 
+            // Add tiende a blando en las multitexturas.
+            texture_unit
+            {
+                texture lightMap.jpg
+                colour_op add
+            }
+        }
+    }
+}
+
+material waterDark
+{
+    technique
+    {
+        pass 
+        {
+            texture_unit
+            {
+                texture water01.jpg
+                colour_op modulate
+            } 
+            // Modulate tiende a negro en las multitexturas.
+            texture_unit
+            {
+                texture lightMap.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material beach
+{
+    technique
+    {
+        pass 
+        {
+            // Textura base de tierra.
+            texture_unit
+            {
+                texture dirt.jpg
+                colour_op modulate
+            }
+            // Mezcla el agua con el componente alpha.
+            texture_unit
+            {
+                texture Material_alpha_blend.png
+                colour_op alpha_blend
+            }
+            // Mezcla el agua con lo anterior. src_texture es la de ese texture_unit y src:current es la textura general hasta ahora.
+            texture_unit
+            {
+                texture water01.jpg
+                colour_op_ex blend_current_alpha src_texture src_current
+            } 
+        }
+    }
+}
+
+material skyPlane
+{
+    technique
+    {
+        pass 
+        {
+            texture_unit
+            {
+                texture spaceSky.jpg
+            }
         }
     }
 }

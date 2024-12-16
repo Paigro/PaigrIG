@@ -562,6 +562,48 @@ void IG2App::setupScene(void)
 
 #pragma endregion
 
+#pragma region multitexturas:
+
+	if (MULTITEXTURES_EXERCISE)
+	{
+		//------------------------------------------------------------------------
+		// Creating the floor
+
+		MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+			Plane(Vector3::UNIT_Y, 0),
+			1500, 1500, 200, 200, true, 1, 1, 1,
+			Vector3::UNIT_Z);
+
+		// Creating the plane
+		Entity* ent = mSM->createEntity("exampleFloor", "floor");
+		ent->setMaterialName("beach");
+		SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
+		floor->attachObject(ent);
+
+		//------------------------------------------------------------------------
+		// Creating Sinbad
+
+		sinbadEnt = mSM->createEntity("Sinbad.mesh");
+		sinbadNode = mSM->getRootSceneNode()->createChildSceneNode();
+		sinbadNode->attachObject(sinbadEnt);
+		sinbadNode->scale(30, 30, 30);
+		sinbadNode->setPosition(-300, 150, 0); // On the floor!
+		sinbadNode->setInitialState();
+
+
+
+		Ogre::Plane plane;
+		plane.d = 1000;
+		plane.normal = Ogre::Vector3::UNIT_Z;
+		mSM->_setSkyPlane(true, plane, "skyPlane",
+			1000, 50,
+			true,
+			3, 50, 50);
+
+	}
+
+#pragma endregion
+
 }
 
 void IG2App::frameRendered(const Ogre::FrameEvent& evt)

@@ -26,7 +26,8 @@ const bool CLOCK_EXERCISE = false; // Si aparece el ejercicio del reloj o no.
 const bool AIRPLANE_EXERCISE = false; // Si aparece el ejercicio del avion o no.
 const bool MATERIALS_EXERCISE = false; // Si aparece el ejercicio de materiales, luces y sombras o no.
 const bool ANIMATION_EXERCISE = false; // Si aparece el ejercicio de animaciones o no.
-const bool PARTICLESYSTEM_EXERCISE = true; // Si aparece el ejercicio de sistemas de particulas o no.
+const bool PARTICLESYSTEM_EXERCISE = false; // Si aparece el ejercicio de sistemas de particulas o no.
+const bool MULTITEXTURES_EXERCISE = true; // Si aparece el ejercicio de multitexturas o no.
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener {
