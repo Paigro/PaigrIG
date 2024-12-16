@@ -380,3 +380,46 @@ material emptyShader
         }
     }
 }
+
+//-----------------------WAVES_SHADER---------------------------------------------------
+
+vertex_program wavesVS glsl
+{
+    source wavesVS.glsl
+    default_params
+    {
+        // Le pasamos la matriz de proyeeccion.
+        param_named_auto modelViewProjMat worldviewproj_matrix 
+        // Le pasamos el tiempo.
+        param_named_auto sinTime sintime_0_2pi 100
+    }
+}
+
+fragment_program wavesFS glsl
+{
+    source wavesFS.glsl
+    default_params
+    {
+        // Le pasamos la textura.
+        param_named wavesTexture int 0
+    }
+}
+
+material wavesShader
+{
+    technique
+    {
+        pass
+        {
+            vertex_program_ref wavesVS {}
+            fragment_program_ref wavesFS {}
+
+            texture_unit
+            {
+                texture water00.jpg
+                // Sobra porque el shader de vertices lo anula.
+                //scroll_anim -0.5 0.0 
+            }
+        }
+    }
+}

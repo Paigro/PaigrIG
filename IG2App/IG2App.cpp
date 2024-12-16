@@ -629,7 +629,7 @@ void IG2App::setupScene(void)
 
 	// Creating the plane
 	Entity* ent = mSM->createEntity("exampleFloor", "floor");
-	ent->setMaterialName("beach");
+	ent->setMaterialName("wavesShader");
 	SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
 	floor->attachObject(ent);
 
