@@ -10,7 +10,7 @@ out vec4 fFragColor;
 void main() {
     vec4 colorChecker = vec4(texture(checkerTexture, vUv0)); // Sacamos los colores de la textura del checker.
     vec4 colorCorrosion = vec4(texture(corrosionTexture, vUv0)); // Sacamos los colores de la textura del corrosion.
-    vec4 colorMetal = vec4(texture(bumpyMetalTexture, vUv0)); // Sacamos los colores de la textura del corrosion.
+    vec4 colorMetal = vec4(texture(bumpyMetalTexture, vUv0)); // Sacamos los colores de la textura del metal.
 
     float isBlack = colorChecker.r + colorChecker.g + colorChecker.b;
 

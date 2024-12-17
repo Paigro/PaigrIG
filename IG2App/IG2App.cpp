@@ -386,23 +386,6 @@ void IG2App::setupScene(void)
 		swordLeftEnt = mSM->createEntity("Sword.mesh");
 		swordRightEnt = mSM->createEntity("Sword.mesh");
 
-		// Obtain the names of all the animations in Sinbad.mesh
-	//    AnimationStateSet * aux = sinbadEnt->getAllAnimationStates();
-	//    auto it = aux->getAnimationStateIterator().begin();
-	//    while (it != aux->getAnimationStateIterator().end()){
-	//        auto s = it->first;
-	//        ++it;
-	//        cout << "Animation name (Sinbad.mesh): " << s << endl;
-	//    }
-
-		// Obtain the names of all the bones in Sinbad.mesh
-	//    SkeletonInstance * skeleton = sinbadEnt->getSkeleton();
-	//    int numBones = skeleton->getNumBones();
-	//    for (int i=0; i<numBones; i++){
-	//        cout << "Bone name (Sinbad.mesh): " << skeleton->getBone(i)->getName() << endl;
-	//    }
-
-
 		//------------------------------------------------------------------------
 		// Animation of Sinbad
 		animationStateDance = sinbadEnt->getAnimationState("Dance");
@@ -414,7 +397,7 @@ void IG2App::setupScene(void)
 		Real duration = 12.0;
 
 		Vector3 keyframePos(0, 0, 0);
-		Quaternion keyFrameRot(Degree(0), Vector3(0, 1, 0));
+		Quaternion keyFrameRot(Degree(0), Vector3(0, 1, 0)); // Empieza mirando al frente. Rot de 0º en Y.
 		Vector3 keyFrameScale(1, 1, 1); // Sinbad ya esta escalado a (30, 30, 30), suficiente...
 
 
@@ -498,8 +481,6 @@ void IG2App::setupScene(void)
 
 		// Our defined animation
 		animationState = mSM->createAnimationState("sinbadWalking");
-		animationState->setLoop(true);
-		animationState->setEnabled(true);
 	}
 
 #pragma endregion
@@ -606,32 +587,36 @@ void IG2App::setupScene(void)
 
 #pragma region shaders:
 
-	orangeSphereEnt = mSM->createEntity("uv_sphere.mesh");
-	orangeSphereNode = mSM->getRootSceneNode()->createChildSceneNode();
-	//orangeSphereEnt->setMaterialName("orageShader"); // Shader que hace todo naranja.
-	//orangeSphereEnt->setMaterialName("checkerShader"); // Shader que pone 2 textura en forma de tablero de ajedrez.
-	orangeSphereEnt->setMaterialName("emptyShader"); // Shader que pone 1 textura en forma de tablero de ajedrez dejando transparente las casillas blancas.
-	orangeSphereNode->attachObject(orangeSphereEnt);
-	orangeSphereNode->setPosition(0, 300, 0);
+	if (SHADERS_EXERCISE) 
+	{
+		orangeSphereEnt = mSM->createEntity("uv_sphere.mesh");
+		orangeSphereNode = mSM->getRootSceneNode()->createChildSceneNode();
+		//orangeSphereEnt->setMaterialName("orageShader"); // Shader que hace todo naranja.
+		//orangeSphereEnt->setMaterialName("checkerShader"); // Shader que pone 2 textura en forma de tablero de ajedrez.
+		//orangeSphereEnt->setMaterialName("emptyShader"); // Shader que pone 1 textura en forma de tablero de ajedrez dejando transparenteS las casillas blancas.
+		orangeSphereEnt->setMaterialName("corrosionShader"); // Shader de la bola corroida por dentro tierra por fuera metal.
+		orangeSphereNode->attachObject(orangeSphereEnt);
+		orangeSphereNode->setPosition(0, 300, 0);
 
-	//Creating a skyplane
-	Ogre::Plane plane;
-	plane.d = 1000;
-	plane.normal = Ogre::Vector3::UNIT_Z;
+		//Creating a skyplane
+		Ogre::Plane plane;
+		plane.d = 1000;
+		plane.normal = Ogre::Vector3::UNIT_Z;
 
-	// Sky using multitexture
-	mSM->setSkyPlane(true, plane, "skyPlaneShader", 20, 1, true, 0, 50, 50);
+		// Sky using multitexture
+		mSM->setSkyPlane(true, plane, "skyPlaneShader", 20, 1, true, 0, 50, 50);
 
-	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Plane(Vector3::UNIT_Y, 0),
-		1500, 1500, 200, 200, true, 1, 1, 1,
-		Vector3::UNIT_Z);
+		MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+			Plane(Vector3::UNIT_Y, 0),
+			1500, 1500, 200, 200, true, 1, 1, 1,
+			Vector3::UNIT_Z);
 
-	// Creating the plane
-	Entity* ent = mSM->createEntity("exampleFloor", "floor");
-	ent->setMaterialName("wavesShader");
-	SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
-	floor->attachObject(ent);
+		// Creating the plane
+		Entity* ent = mSM->createEntity("exampleFloor", "floor");
+		ent->setMaterialName("wavesShader");
+		SceneNode* floor = mSM->getRootSceneNode()->createChildSceneNode();
+		floor->attachObject(ent);
+	}
 
 #pragma endregion
 

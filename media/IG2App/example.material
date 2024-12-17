@@ -361,7 +361,7 @@ material emptyShader
             vertex_program_ref emptyShaderVS {}
             fragment_program_ref emptyShaderFS {}
 
-            // Para que se vean las caras traseras y frontales.
+            // Importante el culling.
             cull_hardware none
 			cull_software none
 
@@ -419,6 +419,63 @@ material wavesShader
                 texture water00.jpg
                 // Sobra porque el shader de vertices lo anula.
                 //scroll_anim -0.5 0.0 
+            }
+        }
+    }
+}
+
+//-----------------------CORROSION_SHADER---------------------------------------------------
+
+vertex_program corrosionShaderVS glsl
+{
+    source corrosionShaderVS.glsl
+    default_params
+    {
+        // Le pasamos la matriz de proyeeccion.
+        param_named_auto modelViewProjMat worldviewproj_matrix 
+    }
+}
+
+fragment_program corrosionShaderFS glsl
+{
+    source corrosionShaderFS.glsl
+    default_params
+    {
+        // Le pasamos la textura de la corrosion.
+        param_named corrosionTexture int 0
+        // Le pasamos la textura de la tierra.
+        param_named dirtTexture int 1
+        // Le pasamos la textura del metal.
+        param_named bumpyMetalTexture int 2
+        // Le pasamos el flipping.
+        param_named_auto flipping render_target_flipping
+    }
+}
+
+material corrosionShader
+{
+    technique
+    {
+        pass
+        {
+            vertex_program_ref corrosionShaderVS {}
+            fragment_program_ref corrosionShaderFS {}
+
+            // Importante el culling.
+            cull_hardware none 
+            cull_software none 
+
+            texture_unit
+            {
+                texture corrosion.jpg
+            }
+            texture_unit
+            {
+                texture dirt.jpg
+            }
+            texture_unit
+            {
+                texture BumpyMetal.jpg
             }
         }
     }

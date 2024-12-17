@@ -63,66 +63,66 @@ private:
 
 	//----Reloj:
 
-	Ogre::SceneNode* clockNode = nullptr; // Nodo que contiene todo el reloj.
-	Ogre::SceneNode* numbersNode = nullptr; // Nodo que contiene los "numeros".
-	Ogre::SceneNode* handsNode = nullptr; // Nodo que contiene las manecillas del reloj. Todas.
+	Ogre::SceneNode* clockNode = nullptr; // Nodo que contiene todo el reloj. (CLOCK)
+	Ogre::SceneNode* numbersNode = nullptr; // Nodo que contiene los "numeros". (CLOCK)
+	Ogre::SceneNode* handsNode = nullptr; // Nodo que contiene las manecillas del reloj. Todas. (CLOCK)
 
-	Ogre::SceneNode* hoursNode = nullptr; // Nodo que contiene la manecilla de las horas.
-	Ogre::SceneNode* minutesNode = nullptr; // Nodo que contiene la manecilla de los minutos.
-	Ogre::SceneNode* secondsNode = nullptr; // Nodo que contiene la manecilla de los segundos. 
+	Ogre::SceneNode* hoursNode = nullptr; // Nodo que contiene la manecilla de las horas. (CLOCK)
+	Ogre::SceneNode* minutesNode = nullptr; // Nodo que contiene la manecilla de los minutos. (CLOCK)
+	Ogre::SceneNode* secondsNode = nullptr; // Nodo que contiene la manecilla de los segundos.  (CLOCK)
 
 	//----Avion:
 
-	Ogre::SceneNode* airplaneNode = nullptr; // Nodo que contiene el avion.
-	Airplane* airplane = nullptr;
+	Ogre::SceneNode* airplaneNode = nullptr; // Nodo que contiene el avion. (AIRPLANE)
+	Airplane* airplane = nullptr; // Entidad del avion. (AIRPLANE)
 
 	//----Materiales, luces y sombras:
 
-	Ogre::SceneNode* planeNode = nullptr; // Nodo que tiene el plano.
-	Ogre::SceneNode* headNode = nullptr; // Nodo que tiene el ogreHead.
-	Ogre::SceneNode* sphereNode = nullptr; // Nodo que tiene una esfera.
+	Ogre::SceneNode* planeNode = nullptr; // Nodo que tiene el plano. (MAT,LUZ,SOM)
+	Ogre::SceneNode* headNode = nullptr; // Nodo que tiene el ogreHead. (MAT,LUZ,SOM)
+	Ogre::SceneNode* sphereNode = nullptr; // Nodo que tiene una esfera. (MAT,LUZ,SOM)
 
 	//----Animacion:
 
 	// Animation state
-	Ogre::AnimationState* animationState; // Caminado.
+	Ogre::AnimationState* animationState; // Caminado. (ANI)
 
 	// Animation states for Sinbad
-	Ogre::AnimationState* animationStateDance; // Baile.
-	Ogre::AnimationState* animationStateRunBase; // Carrera parte de abajo.
-	Ogre::AnimationState* animationStateRunTop; // Carrera parte de arriba.
+	Ogre::AnimationState* animationStateDance; // Baile. (ANI)
+	Ogre::AnimationState* animationStateRunBase; // Carrera parte de abajo. (ANI)
+	Ogre::AnimationState* animationStateRunTop; // Carrera parte de arriba. (ANI)
 
 	// Flags to control the animations
-	bool isDancing = false; // Si esta bailando o no.
-	bool isRunning = false; // Si esta corriendo o no.
-	bool isWalking = false; // Si esta caminando o no.
-	bool attachedLeftSword = false; // Si tiene la espada izquierda o no.
-	bool attachedRightSword = false; // Si tiene la espada derecha o no.
+	bool isDancing = false; // Si esta bailando o no. (ANI)
+	bool isRunning = false; // Si esta corriendo o no. (ANI)
+	bool isWalking = false; // Si esta caminando o no. (ANI)
+	bool attachedLeftSword = false; // Si tiene la espada izquierda o no. (ANI)
+	bool attachedRightSword = false; // Si tiene la espada derecha o no. (ANI)
 
 	// Sinbad and swords
-	Ogre::SceneNode* sinbadNode = nullptr; // Nodo que contiene a Sinbad.
-	Ogre::Entity* sinbadEnt = nullptr; // Entidad de Sinbad.
-	Ogre::Entity* swordLeftEnt = nullptr; // Entidad de la espada izquierda.
-	Ogre::Entity* swordRightEnt = nullptr; // Entidad de la espada derecha.
+	Ogre::SceneNode* sinbadNode = nullptr; // Nodo que contiene a Sinbad. (ANI)
+	Ogre::Entity* sinbadEnt = nullptr; // Entidad de Sinbad. (ANI)
+	Ogre::Entity* swordLeftEnt = nullptr; // Entidad de la espada izquierda. (ANI)
+	Ogre::Entity* swordRightEnt = nullptr; // Entidad de la espada derecha. (ANI)
 
 	//----Sistemas de particulas:
 
-	ParticleSystem* pSys = nullptr; // Sistema de particulas de humo.
+	ParticleSystem* pSys = nullptr; // Sistema de particulas de humo. (PAR_SYS)
 
-	Ogre::SceneNode* pSNode = nullptr; // Nodo que tiene al sistema de particulas de humo.
+	Ogre::SceneNode* pSNode = nullptr; // Nodo que tiene al sistema de particulas de humo. (PAR_SYS)
 
 
-	Entity* sphereTailEnt = nullptr; // Esfera que va a rotar y tiene un trail. 
+	Entity* sphereTailEnt = nullptr; // Esfera que va a rotar y tiene un trail.  (PAR_SYS)
 
-	ParticleSystem* tailPsys = nullptr; // Sistemas de particulas que hara de trail de la esfera.
+	ParticleSystem* tailPsys = nullptr; // Sistemas de particulas que hara de trail de la esfera. (PAR_SYS)
 
-	Ogre::SceneNode* sphereTailNode = nullptr; // Nodo que tiene a la esfera
-	Ogre::SceneNode* ghostNode = nullptr; // Nodo fantasma que tiene a la esfera y que rotaremos.
+	Ogre::SceneNode* sphereTailNode = nullptr; // Nodo que tiene a la esfera. (PAR_SYS)
+	Ogre::SceneNode* ghostNode = nullptr; // Nodo fantasma que tiene a la esfera y que rotaremos. (PAR_SYS)
 
 	//------Shaders:
 
-	Entity* orangeSphereEnt = nullptr; // Entidad esfera uv a la que le aplicaremos shaders.
-	Ogre::SceneNode* orangeSphereNode = nullptr; // Nodo que tiene a la esfera uv a la que le aplicaremos shaders.
+	Entity* orangeSphereEnt = nullptr; // Entidad esfera uv a la que le aplicaremos shaders. (SHADERS)
+	Ogre::SceneNode* orangeSphereNode = nullptr; // Nodo que tiene a la esfera uv a la que le aplicaremos shaders. (SHADERS)
 };
 
 #endif
